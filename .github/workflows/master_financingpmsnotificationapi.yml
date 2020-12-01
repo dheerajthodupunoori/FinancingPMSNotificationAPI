@@ -35,4 +35,4 @@ jobs:
         app-name: 'financingpmsnotificationapi'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_3c23cb5668cc45b6be6d376caaac80eb }}
-        package: '.\myapp.zip'
+        package: '.\*app.zip'
