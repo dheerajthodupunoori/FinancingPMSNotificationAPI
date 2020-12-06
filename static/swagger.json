@@ -3,13 +3,58 @@
   "info": {
     "description": "Notification API for FinancingPMS",
     "version": "1.0.0",
-    "title": "NotificationAPIForFinancingPMS",
+    "title": "Notification API For FinancingPMS",
     "contact": {
       "email": "dheeraj.thodupunoori01@gmail.com"
     },
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url" : "http://127.0.0.1:5000/"
+    }
+  ] ,
+  "tags": [
+    {
+      "name" : "Basic demo Requests - Dummy Requests",
+      "description": "Dummy requests which demonstrates the usage of Flask API . A kind of POC"
+    },
+    {
+      "name": "FinancingPMS Notification - Requests",
+      "description": "API endpoint to send an email to the user"
+    }
+  ] ,
+  "paths": {
+    "/SendEmailNotification" : {
+      "post" : {
+        "tags": ["FinancingPMS Notification - Requests"],
+        "summary": "API endpoint to send an email to the user.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+            },
+            "examples": {
+              "Email - Details": {
+                "value": {
+                  "Body": "Registration successfull",
+                  "Subject": "Registration Update"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SUCCESS"
+          },
+            "example": {
+              "mailsentstatus": "True"
+            }
+        }
+      }
     }
   }
 }

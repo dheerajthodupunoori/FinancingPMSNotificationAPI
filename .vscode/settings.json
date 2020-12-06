@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/25bc2da3-a058-4e87-8066-472743393fd3/resourceGroups/FinancingPMS/providers/Microsoft.Web/sites/FinancingPMSNotificationAPI",
+    "appService.deploySubpath": "."
+}

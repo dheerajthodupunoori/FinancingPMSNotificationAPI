@@ -13,7 +13,7 @@ SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
     SWAGGER_URL,
     API_URL,
     config={
-        'app_name': "NotificationAPIForFinancingPMS"
+        'app_name': "NotificationAPI For FinancingPMS"
     }
 )
 app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
