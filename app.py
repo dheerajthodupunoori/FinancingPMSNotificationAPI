@@ -1,12 +1,10 @@
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 from flask import Flask, jsonify, request
 from flask_swagger_ui import get_swaggerui_blueprint
+from scripts.notification import sendEmail
 
 app = Flask(__name__)
 
-### swagger specific ###
+# swagger specific
 SWAGGER_URL = '/swagger'
 API_URL = '/static/swagger.json'
 SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
@@ -19,7 +17,7 @@ SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
 app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
 
 
-### end swagger specific ###
+# end swagger specific
 
 
 @app.route("/")
@@ -29,31 +27,21 @@ def welcome():
 
 @app.route("/SendEmailNotification", methods=['POST'])
 def SendEmailNotification():
-    # print(request.get_json()['Subject'])
-
     mailData = request.get_json()
+    try:
+        sendEmail(mailData)
+    except Exception as e:
+        print("An error occurred while sending an email.")
+        print(e)
+        return "False"
+    # else block executed only when try does not throw any exception
+    else:
+        print("Email sent successfully")
+    # finally block is executed only when
+    finally:
+        print("Email process completed")
 
-    sender_address = "notification.personal.dev@gmail.com"
-    pwd = "notification@1921"
-    receiver_address = "dheeraj.thodupunoori01@gmail.com"
-
-    mail_content = mailData['Body']
-    # preparing message
-    message = MIMEMultipart()
-    message['From'] = sender_address
-    message['To'] = receiver_address
-    message['Subject'] = mailData['Subject']
-    message.attach(MIMEText(mail_content, 'plain'))
-
-    # creating SMTP session
-    session = smtplib.SMTP('smtp.gmail.com', 587)
-    session.starttls()
-    session.login(sender_address, pwd)
-    text = message.as_string()
-    session.sendmail(sender_address, receiver_address, text)
-    session.quit()
-
-    return jsonify(mailsentstatus=True)
+    return "True"
 
 
 @app.route('/Parameters')
