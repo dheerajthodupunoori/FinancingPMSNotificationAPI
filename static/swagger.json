@@ -39,7 +39,7 @@
             "examples": {
               "Email - Details": {
                 "value": {
-                  "Body": "Registration successfull",
+                  "Body": "Registration successful",
                   "Subject": "Registration Update"
                 }
               }
